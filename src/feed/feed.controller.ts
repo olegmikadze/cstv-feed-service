@@ -10,4 +10,9 @@ export class FeedController {
   async getHello(): Promise<string> {
     return await this.feedService.getHello();
   }
+
+  @MessagePattern({ cmd: 'incidents' })
+  async getIncidents() {
+    await this.feedService.getIncidents();
+  }
 }
