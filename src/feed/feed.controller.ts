@@ -6,7 +6,7 @@ import { ClientProxy, MessagePattern } from '@nestjs/microservices';
 export class FeedController {
   constructor(
     private readonly feedService: FeedService,
-    @Inject('FEED_SERVICE') private readonly client: ClientProxy,
+    @Inject('FEED_SERVICE') private readonly client: ClientProxy, //!! from outside FEED_SERVICE service
   ) {}
 
   @MessagePattern({ cmd: 'hello' })
@@ -14,6 +14,7 @@ export class FeedController {
     return await this.feedService.getHello();
   }
 
+  //!! from outside FEED_SERVICE service
   @Get('/')
   async testGetIncidents() {
     const pattern = { cmd: 'sum' };
