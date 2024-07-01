@@ -8,7 +8,7 @@ export class FeedService {
     return Promise.resolve('Hello World!');
   }
 
-  async getIncidents() {
+  async getIncidents(): Promise<any> {
     const incidents = await request('https://api.pandascore.co/incidents');
 
     console.log(
