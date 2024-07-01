@@ -1,12 +1,19 @@
-import { Controller, Inject, Get } from '@nestjs/common';
+import {
+  Controller,
+  // Inject,
+  // Get
+} from '@nestjs/common';
 import { FeedService } from './feed.service';
-import { ClientProxy, MessagePattern } from '@nestjs/microservices';
+import {
+  // ClientProxy,
+  MessagePattern,
+} from '@nestjs/microservices';
 
 @Controller('feed')
 export class FeedController {
   constructor(
     private readonly feedService: FeedService,
-    @Inject('FEED_SERVICE') private readonly client: ClientProxy,
+    // @Inject('FEED_SERVICE') private readonly client: ClientProxy, //!! from outside FEED_SERVICE service
   ) {}
 
   @MessagePattern({ cmd: 'hello' })
@@ -14,12 +21,13 @@ export class FeedController {
     return await this.feedService.getHello();
   }
 
-  @Get('/')
-  async testGetIncidents() {
-    const pattern = { cmd: 'sum' };
-    const data = [1, 2, 3, 4, 5];
-    return await this.client.send<number>(pattern, data);
-  }
+  //!! from outside FEED_SERVICE service
+  // @Get('/')
+  // async testGetIncidents() {
+  //   const pattern = { cmd: 'sum' };
+  //   const data = [1, 2, 3, 4, 5];
+  //   return await this.client.send<number>(pattern, data);
+  // }
 
   @MessagePattern({ cmd: 'get-incidents' })
   async getIncidents(): Promise<any> {
