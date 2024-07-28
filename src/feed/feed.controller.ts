@@ -2,7 +2,7 @@ import { Controller } from '@nestjs/common';
 import { FeedService } from './feed.service';
 import { MessagePattern } from '@nestjs/microservices';
 
-@Controller('feed')
+@Controller()
 export class FeedController {
   constructor(private feedService: FeedService) {}
 
@@ -12,8 +12,8 @@ export class FeedController {
   }
 
   @MessagePattern({ cmd: 'get-incidents' })
-  async getIncidents(data: number[]): Promise<number> {
+  async getIncidents(): Promise<string> {
     console.log('good test');
-    return (data || []).reduce((a, b) => a + b);
+    return 'string';
   }
 }
