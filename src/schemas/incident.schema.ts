@@ -1,42 +1,45 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
-import { LeagueObj } from './league-object.schema';
-import { MatchObj } from './match-object.schema';
-import { SerieObj } from './serie-object.schema';
+import { League } from './league.schema';
+import { Match } from './match.schema';
+import { Serie } from './serie.schema';
+import { Tournament } from './tournament.schema';
+import { Player } from './player.schema';
+import { Team } from './team.schema';
+import { DeletionIncident } from './deletion-object.schema';
 
 export type IncidentDocument = HydratedDocument<Incident>;
-
-enum ChangeType {
-  Deletion = 'deletion',
-  Creation = 'creation',
-  Update = 'update',
-}
-
-enum Type {
-  League = 'league',
-  Match = 'match',
-  Player = 'player',
-  Serie = 'serie',
-  Team = 'team',
-  Tournament = 'tournament',
-}
-
 @Schema()
 export class Incident {
+  @Prop({
+    type: String,
+    enum: ['deletion', 'creation', 'update'],
+    required: true,
+  })
+  change_type: string;
+
   @Prop({ type: Number })
   id: number;
-
-  @Prop({ type: String, enum: ChangeType })
-  change_type: ChangeType;
 
   @Prop({ type: String })
   modified_at: string;
 
-  @Prop({ type: String, enum: Type, required: true })
-  type: Type;
-
   @Prop({ type: mongoose.Schema.Types.Mixed })
-  object: LeagueObj | MatchObj | SerieObj;
+  object:
+    | League
+    | Serie
+    | Tournament
+    | Match
+    | Team
+    | Player
+    | DeletionIncident;
+
+  @Prop({
+    type: String,
+    enum: ['league', 'match', 'player', 'serie', 'team', 'tournament'],
+    required: true,
+  })
+  type: string;
 }
 
 export const IncidentSchema = SchemaFactory.createForClass(Incident);

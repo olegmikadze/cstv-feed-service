@@ -752,10 +752,10 @@
     iterare "1.2.1"
     tslib "2.6.2"
 
-"@nestjs/mongoose@^10.0.6":
-  version "10.0.6"
-  resolved "https://registry.yarnpkg.com/@nestjs/mongoose/-/mongoose-10.0.6.tgz#6081975eaa658a6097b63d139a82f58b2b35956c"
-  integrity sha512-J8jFgSvCDEKMXU57QAIdXIlWQsOFWK+x0PM1KI/0zHe3/4JrAtFGTFD08hRX3IHk+WJT9g/XQIpMSNM7/10Jlg==
+"@nestjs/mongoose@^10.0.10":
+  version "10.0.10"
+  resolved "https://registry.yarnpkg.com/@nestjs/mongoose/-/mongoose-10.0.10.tgz#1206df06b6f744f62b0bd7502074c13f17177739"
+  integrity sha512-3Ff60ock8nwlAJC823TG91Qy+Qc6av+ddIb6n6wlFsTK0akDF/aTcagX8cF8uI8mWxCWjEwEsgv99vo6p0yJ+w==
 
 "@nestjs/platform-express@^10.0.0":
   version "10.3.9"
@@ -767,6 +767,14 @@
     express "4.19.2"
     multer "1.4.4-lts.1"
     tslib "2.6.2"
+
+"@nestjs/schedule@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@nestjs/schedule/-/schedule-4.1.0.tgz#b0ae64519365821f4186416915e502d225836048"
+  integrity sha512-WEc96WTXZW+VI/Ng+uBpiBUwm6TWtAbQ4RKWkfbmzKvmbRGzA/9k/UyAWDS9k0pp+ZcbC+MaZQtt7TjQHrwX6g==
+  dependencies:
+    cron "3.1.7"
+    uuid "10.0.0"
 
 "@nestjs/schematics@^10.0.0", "@nestjs/schematics@^10.0.1":
   version "10.1.1"
@@ -1002,6 +1010,11 @@
   version "7.0.15"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
   integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
+
+"@types/luxon@~3.4.0":
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-3.4.2.tgz#e4fc7214a420173cea47739c33cdf10874694db7"
+  integrity sha512-TifLZlFudklWlMBfhubvgqTXRzLDI5pCbGa4P8a3wPyUQSW+1xQ5eDsreP9DWHX3tjq1ke96uYG/nwundroWcA==
 
 "@types/methods@^1.1.4":
   version "1.1.4"
@@ -1997,6 +2010,14 @@ create-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
   integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
+
+cron@3.1.7:
+  version "3.1.7"
+  resolved "https://registry.yarnpkg.com/cron/-/cron-3.1.7.tgz#3423d618ba625e78458fff8cb67001672d49ba0d"
+  integrity sha512-tlBg7ARsAMQLzgwqVxy8AZl/qlTc5nibqYwtNGoCrd+cV+ugI+tvZC1oT/8dFH8W455YrywGykx/KMmAqOr7Jw==
+  dependencies:
+    "@types/luxon" "~3.4.0"
+    luxon "~3.4.0"
 
 cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
@@ -3595,6 +3616,11 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+luxon@~3.4.0:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-3.4.4.tgz#cf20dc27dc532ba41a169c43fdcc0063601577af"
+  integrity sha512-zobTr7akeGHnv7eBOXcRgMeCP6+uyYsczwmeRCauvpvaAltgNyTbLH/+VaEAPUeWBT+1GuNmz4wC/6jtQzbbVA==
+
 magic-string@0.30.5:
   version "0.30.5"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.30.5.tgz#1994d980bd1c8835dc6e78db7cbd4ae4f24746f9"
@@ -3751,23 +3777,23 @@ mongodb-connection-string-url@^3.0.0:
     "@types/whatwg-url" "^11.0.2"
     whatwg-url "^13.0.0"
 
-mongodb@6.6.2:
-  version "6.6.2"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-6.6.2.tgz#7ecdd788e9162f6c5726cef40bdd2813cc01e56c"
-  integrity sha512-ZF9Ugo2JCG/GfR7DEb4ypfyJJyiKbg5qBYKRintebj8+DNS33CyGMkWbrS9lara+u+h+yEOGSRiLhFO/g1s1aw==
+mongodb@6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-6.7.0.tgz#f86e51e6530e6a2ca4a99d7cfdf6f409223ac199"
+  integrity sha512-TMKyHdtMcO0fYBNORiYdmM25ijsHs+Njs963r4Tro4OQZzqYigAzYQouwWRg4OIaiLRUEGUh/1UAcH5lxdSLIA==
   dependencies:
     "@mongodb-js/saslprep" "^1.1.5"
     bson "^6.7.0"
     mongodb-connection-string-url "^3.0.0"
 
-mongoose@^8.4.1:
-  version "8.4.1"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.4.1.tgz#21891c0b72890b33c7bb082b69a32f627b7043bf"
-  integrity sha512-odQ2WEWGL3hb0Qex+QMN4eH6D34WdMEw7F1If2MGABApSDmG9cMmqv/G1H6WsXmuaH9mkuuadW/WbLE5+tHJwA==
+mongoose@^8.5.2:
+  version "8.5.2"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.5.2.tgz#73b40ce778f3fc66407aba3c3157795cdd278543"
+  integrity sha512-GZB4rHMdYfGatV+23IpCrqFbyCOjCNOHXgWbirr92KRwTEncBrtW3kgU9vmpKjsGf7nMmnAy06SwWUv1vhDkSg==
   dependencies:
     bson "^6.7.0"
     kareem "2.6.3"
-    mongodb "6.6.2"
+    mongodb "6.7.0"
     mpath "0.9.0"
     mquery "5.0.0"
     ms "2.1.3"
@@ -4971,6 +4997,11 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
+
+uuid@10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-10.0.0.tgz#5a95aa454e6e002725c79055fd42aaba30ca6294"
+  integrity sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==
 
 v8-compile-cache-lib@^3.0.1:
   version "3.0.1"
