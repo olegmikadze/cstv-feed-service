@@ -1,10 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Schema as MongooseSchema } from 'mongoose';
-// import { League, LeagueSchema } from './league.schema';
 import { Videogame } from './videogame.schema';
 import { Tournament } from './tournament.schema';
 import { League } from './league.schema';
-// import createPartialSchema from '../lib/createPartialSchema';
 
 export type SerieDocument = HydratedDocument<Serie>;
 

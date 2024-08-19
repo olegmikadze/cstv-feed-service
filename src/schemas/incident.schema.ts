@@ -14,11 +14,10 @@ export class Incident {
   @Prop({
     type: String,
     enum: ['deletion', 'creation', 'update'],
-    required: true,
   })
   change_type: string;
 
-  @Prop({ type: Number })
+  @Prop({ type: Number, unique: true })
   id: number;
 
   @Prop({ type: String })
@@ -37,7 +36,6 @@ export class Incident {
   @Prop({
     type: String,
     enum: ['league', 'match', 'player', 'serie', 'team', 'tournament'],
-    required: true,
   })
   type: string;
 }

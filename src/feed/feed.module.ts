@@ -9,12 +9,17 @@ import { Player, PlayerSchema } from 'src/schemas/player.schema';
 import { Serie, SerieSchema } from 'src/schemas/serie.schema';
 import { Tournament, TournamentSchema } from 'src/schemas/tournament.schema';
 import { Incident, IncidentSchema } from 'src/schemas/incident.schema';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://admin:admin@cstv-feed.mcikufr.mongodb.net/?retryWrites=true&w=majority&appName=cstv-feed',
-    ),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('MONGODB_URL'),
+      }),
+      inject: [ConfigService],
+    }),
     MongooseModule.forFeature([
       { name: Incident.name, schema: IncidentSchema },
       { name: Team.name, schema: TeamSchema },
