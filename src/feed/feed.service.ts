@@ -25,35 +25,38 @@ export class FeedService {
 
     const latestIncidents = await this.getLatestIncidents(timestampInMsISO);
 
-    for await (const inc of latestIncidents) {
+    const incidentPromises = latestIncidents.map(async (inc) => {
       this.logger.debug(`Processing incident: ${inc.id}`);
 
-      const incidentExists = await this.incidentModel.findOne({
-        id: inc.id,
-      });
+      try {
+        let incident = await this.incidentModel.findOne({ id: inc.id });
 
-      if (!incidentExists) {
-        this.logger.debug(`Incident ${inc.id} does not exist, CREATING...`);
+        if (!incident) {
+          this.logger.debug(`Incident ${inc.id} does not exist, CREATING...`);
+          incident = new this.incidentModel({
+            id: inc.id,
+            modified_at: inc.modified_at,
+            type: inc.type,
+            logs: [{ change_type: inc.change_type, object: inc.object }],
+          });
+        } else {
+          this.logger.debug(`Incident ${inc.id} exists, UPDATING...`);
+          incident.modified_at = inc.modified_at;
+          incident.logs.push({
+            change_type: inc.change_type,
+            object: inc,
+          });
+        }
 
-        const createdIncidentDoc = new this.incidentModel({
-          id: inc.id,
-          modified_at: inc.modified_at,
-          type: inc.type,
-          logs: [{ change_type: inc.change_type, object: inc.object }],
-        });
-        await createdIncidentDoc.save();
-        break;
+        await incident.save();
+      } catch (error) {
+        this.logger.error(
+          `Error processing incident ${inc.id}: ${error.message}`,
+        );
       }
+    });
 
-      incidentExists.modified_at = inc.modified_at;
-      incidentExists.logs.push({
-        change_type: inc.change_type,
-        object: inc,
-      });
-      await incidentExists.save();
-
-      this.logger.debug(`Incident ${inc.id} UPDATED`);
-    }
+    await Promise.all(incidentPromises);
   }
 
   async getLatestIncidents(since: string): Promise<IncidentType[]> {
