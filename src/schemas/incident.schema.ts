@@ -1,37 +1,41 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
-import { League } from './league.schema';
-import { Match } from './match.schema';
-import { Serie } from './serie.schema';
-import { Tournament } from './tournament.schema';
-import { Player } from './player.schema';
-import { Team } from './team.schema';
-import { DeletionIncident } from './deletion-object.schema';
+// import { League } from './league.schema';
+// import { Match } from './match.schema';
+// import { Serie } from './serie.schema';
+// import { Tournament } from './tournament.schema';
+// import { Player } from './player.schema';
+// import { Team } from './team.schema';
+// import { DeletionIncident } from './deletion-object.schema';
 
-export type IncidentDocument = HydratedDocument<Incident>;
 @Schema()
-export class Incident {
-  @Prop({
-    type: String,
-    enum: ['deletion', 'creation', 'update'],
-  })
+export class Log {
+  @Prop({ type: String })
   change_type: string;
 
+  @Prop({ type: mongoose.Schema.Types.Mixed })
+  object: any;
+  // | League
+  // | Serie
+  // | Tournament
+  // | Match
+  // | Team
+  // | Player
+  // | DeletionIncident;
+}
+const LogSchema = SchemaFactory.createForClass(Log);
+
+export type IncidentDocument = HydratedDocument<IncidentDoc>;
+@Schema()
+export class IncidentDoc {
   @Prop({ type: Number, unique: true })
   id: number;
 
   @Prop({ type: String })
   modified_at: string;
 
-  @Prop({ type: mongoose.Schema.Types.Mixed })
-  object:
-    | League
-    | Serie
-    | Tournament
-    | Match
-    | Team
-    | Player
-    | DeletionIncident;
+  @Prop({ type: [LogSchema] })
+  logs: Log[];
 
   @Prop({
     type: String,
@@ -40,4 +44,4 @@ export class Incident {
   type: string;
 }
 
-export const IncidentSchema = SchemaFactory.createForClass(Incident);
+export const IncidentSchema = SchemaFactory.createForClass(IncidentDoc);
